@@ -1,8 +1,9 @@
 # priority
-# Ques. 15. A uniprocessor system has n number of CPU intensive processes, each process has its
-# own requirement of CPU burst. The process with lowest CPU burst is given the highest priority.
-# A late-arriving higher priority process can preempt a currently running process with lower
-# priority. Simulate a scheduler that is scheduling the processes in such a way that higher priority
-# process is never starved due to the execution of lower priority process. What should be its
-# average waiting time and average turnaround time if no two processes are arriving are arriving at
-# same time. 
+# Ques. 14. Write a program to implement priority scheduling algorithm with context switching
+# time. Prompt to user to enter the number of processes and then enter their priority, burst time and
+# arrival time also. Now whenever operating system preempts a process and shifts cpu’s control to
+# some another process of higher priority assume that it takes 2 seconds for context
+# switching(dispatcher latency).Form a scenario, where we can give the processes are assigned
+# with priority where the lower integer number is higher priority and then context switch .. as the
+# process waits the priority of the process increase at rate of one per 2 time units of wait.
+# Calculate waiting time and turnaround time for each process.
