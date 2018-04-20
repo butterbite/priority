@@ -103,8 +103,8 @@ bool checkingforpreemption(struct process q[],int totaltime,int totaltime1,int *
     {
         if(**previous!=-1)
         {
-            cout<<"is this running\n";
-    if(q[i].at==totaltime && q[i].pt<q[**current].pt)
+            
+    if(q[i].at==totaltime && q[i].pt<q[**current].pt && q[i].bt>0 && q[**current].bt>0)
     {
         check=true;
         **previous=**current;
@@ -154,6 +154,8 @@ void assigning(struct process p[],struct process q[],int totaltime1,int **curren
     p[q[**previous].pno].bt=p[q[**previous].pno].bt - (p[q[**previous].pno].end - p[q[**previous].pno].start);
   q[**previous].bt=  p[q[**previous].pno].bt;
         q[**previous].wstatus=true;
+  
+        
     }
     else
     {
@@ -166,14 +168,6 @@ void assigning(struct process p[],struct process q[],int totaltime1,int **curren
      q[**current].wstatus=true;
      
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }
@@ -193,15 +187,7 @@ void assigning1(struct process p[],struct process q[],int totaltime1,int **curre
      q[**current].wstatus=true;
      
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+       
     
 }
 
@@ -212,7 +198,7 @@ void finishuntill(struct process p[],struct process q[],int **current,int **prev
     int h=*totaltime;
     int j=*totaltime1;
     
- for(;k<q[**current].bt;k++)
+ for(;k<q[**current].bt && q[**current].bt>0;k++)
  {
  cout<<"totaltime one is"<<*totaltime1<<" value of k "<<k<<"\n";
      h++;
@@ -249,16 +235,16 @@ void scheduling(struct process p[],struct process q[], int n,int *current,int* p
 {
     
 int i=0;
-for(;i<q[*current].bt;)
+for(;i<q[*current].bt && q[*current].bt>0;)
 {
    // cout<<previous;
     i++;
      totaltime++;
      totaltime1++;
       //  cout<<"value of previous and current"<<*previous<<*current<<"totaltime is"<<totaltime<<"\n";
-     if(totaltime%2==0)
+  //   if(totaltime%2==0)
      {
-      decreasepriority(q,n,&totaltime);   
+    //  decreasepriority(q,n,&totaltime);   
      }
    if( checkingforpreemption(q,totaltime,totaltime1,&current,&previous,n))
     {
