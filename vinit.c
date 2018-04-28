@@ -330,6 +330,7 @@ int po=*totaltime1;
  int yadav=**previous;
  int *vinit1=&vinit;
  int *yadav1=&yadav;
+	     //int const *yadav;
  assigning1(p,q,temp1,&vinit1,&yadav1);
  **previous=**current;
     
