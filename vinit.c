@@ -76,7 +76,8 @@ void input(struct process p[],int n)
 {
 	
 	for(int i=0;i<n;i++)
-	{cout<<"Enter arrrival time for process";
+	{
+        cout<<"Enter arrrival time for process";
 	cin>>p[i].at;
 	cout<<"Enter burst time for process";
 	cin>>p[i].bt;
@@ -96,8 +97,7 @@ void copy(struct process q[],struct process p[],int n)
 
 bool checkingforpreemption(struct process q[],int totaltime,int totaltime1,int **current,int** previous, int n)
 {
-     cout<<"value of previous and current"<<**previous<<**current<<"totaltime is"<<totaltime<<"Totaltime one"<<totaltime1<<"\n";
-     //   cout<<"\nllllllllllllllll";
+    
     bool check=false;
     for(int i=0;i<n;i++)
     {
@@ -122,7 +122,7 @@ bool checkingforpreemption(struct process q[],int totaltime,int totaltime1,int *
       
 //        if(q[i].at==totaltime && q[i].pt<q[**previous].pt )
         {
-        cout<<"is this running\n";
+       
             check=true;
             **previous=**current;
         **current=i;
@@ -200,7 +200,7 @@ void finishuntill(struct process p[],struct process q[],int **current,int **prev
     
  for(;k<q[**current].bt && q[**current].bt>0;k++)
  {
- cout<<"totaltime one is"<<*totaltime1<<" value of k "<<k<<"\n";
+ 
      h++;
      j++;
   *totaltime=h;
@@ -242,9 +242,9 @@ for(;i<q[*current].bt && q[*current].bt>0;)
      totaltime++;
      totaltime1++;
       //  cout<<"value of previous and current"<<*previous<<*current<<"totaltime is"<<totaltime<<"\n";
-  //   if(totaltime%2==0)
+     if(totaltime%2==0)
      {
-    //  decreasepriority(q,n,&totaltime);   
+      decreasepriority(q,n,&totaltime);   
      }
    if( checkingforpreemption(q,totaltime,totaltime1,&current,&previous,n))
     {
@@ -261,8 +261,7 @@ for(;i<q[*current].bt && q[*current].bt>0;)
         assigning1(p,q,totaltime1,&current,&previous);
         remtime(p,q,&previous,&current,&totaltime,&totaltime1,n);
         //*previous=*current;
-         cout<<"value of previous and current"<<*previous<<*current<<"totaltime is"<<totaltime<<"Totaltime one"<<totaltime1<<"\n";
-         cout<<"\nnow exiting";
+        
          
         break;
     }
@@ -319,19 +318,19 @@ int po=*totaltime1;
          po++;
     *totaltime=h;
          *totaltime1=po;
-       /*  if(*totaltime1%2==0)
+         if(*totaltime1%2==0)
          {
              int z=*totaltime1;
           decreasepriority(q,n,&z);   
-         }*/
+         }
  }
  int temp1=*totaltime1;
  
- int shivam=**current;
- int pandey=**previous;
- int *shivam1=&shivam;
- int *pandey1=&pandey;
- assigning1(p,q,temp1,&shivam1,&pandey1);
+ int vinit=**current;
+ int yadav=**previous;
+ int *vinit1=&vinit;
+ int *yadav1=&yadav;
+ assigning1(p,q,temp1,&vinit1,&yadav1);
  **previous=**current;
     
     
@@ -351,14 +350,28 @@ int po=*totaltime1;
 void print(struct process p[],int n)
 {
     for(int i=0;i<n;i++){
-        cout<<"process No"<<p[i].pno<<"\n";
- cout<<"Burst Time"<<p[i].bt<<"\n";
- cout<<"Start"<<p[i].start<<"\n";
- cout<<"End"<<p[i].end<<"\n";
+        cout<<"Process No\t"<<p[i].pno<<"\n";
+ cout<<"Waiting Time\t"<<p[i].waiting<<"\n";
+ cout<<"turnaround Time\t"<<p[i].turnaround<<"\n\n\n\n";
+
     }   
   //  return 5;   
 }
-
+void waitingtime(struct process p[],int  n)
+{
+    for(int i=0;i<n;i++)
+    {
+     p[i].turnaround=p[i].end - p[i].start;   
+        
+    }
+    for(int i=0;i<n;i++)
+    {
+        
+     p[i].waiting=p[i].turnaround-p[i].bt;   
+    }
+    
+    
+}
 int main()
 {
     
@@ -371,7 +384,8 @@ int main()
     sortonarrivaltime(q,n);
     maximumarrivaltime(q,n);
     scheduling(p,q,n,&current,&previous);
-
+waitingtime(p,n);
 print(p,n);
+
 }
 
